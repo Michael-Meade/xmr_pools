@@ -1,6 +1,7 @@
 require 'httparty'
 require 'json'
 require 'bigdecimal'
+require 'terminal-table'
 module Pools
     class NanoPool
         def initialize(address)
@@ -53,6 +54,7 @@ module Pools
         return results
         end
     end
+    
     class HashVaultPro
         def initialize(address)
             @address = address
@@ -67,7 +69,7 @@ module Pools
             rsp      = HTTParty.get(url).response.body                
             main     = JSON.parse(rsp)
             paid     = main["revenue"]["totalPaid"].to_f / 1000000000000
-            bal      = main["revenue"]["confirmedBalance"].to_f / 1000000000000
+            bal      = main["revenue"]["confirmedBalance"].to_f / 10000000000000
             hashrate = main["collective"]["hashRate"]
             results  = {}
             results["paid"]     = paid
@@ -105,6 +107,38 @@ module Pools
         return results
         end
     end
+    class XMRPoolEU
+        def initialize(address)
+            @address = address
+        end
+        def address
+            @address
+        end
+        def url
+            "https://web.xmrpool.eu:8119/stats_address?address=#{address}&longpoll=false"
+        end
+        def get
+            rsp     = HTTParty.get(url).response.body
+            if !rsp.include?("error")
+                main    = JSON.parse(rsp)["stats"]
+                results = {}
+                bal     = main["balance"].to_f / 1000000000000
+                
+                results["balance"]  = bal
+                if !main.has_key?("paid")
+                    results["paid"] = 0
+                    paid            = 0
+                else
+                    paid    = main["paid"].to_f / 1000000000000
+                    results["paid"] = paid
+                end
+                results["hashrate"] = main["hash"]
+                results["total"]    = bal + paid
+                results["name"]     = "xmrpool.eu"
+            end
+        return results
+        end
+    end
     class SupportXmr
         def initialize(address)
             @address = address
@@ -130,13 +164,35 @@ module Pools
         end
     end
 end
+class HeroMiners
+    def initialize(address)
+        @address = address
+    end
+    def address
+        @address
+    end
+    def url
+        "https://monero.herominers.com/api/stats_address?address=#{address}&longpoll=true"
+    end
+    def get
+        rsp     = HTTParty.get(url).response.body
+        main    = JSON.parse(rsp)["stats"]
+        results = {}
+        bal     = main["balance"].to_f / 1000000000000
+        paid    = main["amtPaid"].to_f / 1000000000000
+        results["balance"]  = bal
+        results["paid"]     = paid
+        results["hashrate"] = main["hash"]
+        results["total"]    = bal + paid
+        results["name"]     = "monero.herominers.com"
+    return results
+    end
+end
 def get_all(addr)
     t = 0
     Pools.constants.select do |c|
         k = Pools.const_get(c).new(addr).get
-        p k
         if !k.nil?
-            puts k["total"]
            t += k["total"]
         end
     end
@@ -145,4 +201,35 @@ puts "Address: #{addr}"
 puts "Balance: #{t}"
 end
 
-get_all("49ubSTdDp9hPmYE7paRM6PZFLmqvsedZ56MXLUT8mvYnTzjVCKGDbpuW4RVdvZon228uWnkjoJN8S6w5S4LdgeK8UBMMEhJ")
+def get_pools(addr)
+    Pools.constants.select do |c|
+        k = Pools.const_get(c).new(addr).get
+        if !k.nil?
+           puts k["name"].to_s + " - " + k["total"].to_s
+        end
+    end
+end
+def array(addr)
+    out = []
+    Pools.constants.select do |c|
+        k = Pools.const_get(c).new(addr).get
+        if !k.nil?
+            out << [k["name"], k["total"]]
+        end
+    end
+return out
+end
+def print_table(addr)
+    out = array(addr)
+    table = Terminal::Table.new
+    table.title = addr
+    table.headings = ["POOL", "Amount"]
+    table.rows  = out
+    table.style = {:width => @width, :border => :unicode_round, :alignment => :center }
+    puts table
+end
+
+
+#get_pools("49ubSTdDp9hPmYE7paRM6PZFLmqvsedZ56MXLUT8mvYnTzjVCKGDbpuW4RVdvZon228uWnkjoJN8S6w5S4LdgeK8UBMMEhJ")
+    #"49ubSTdDp9hPmYE7paRM6PZFLmqvsedZ56MXLUT8mvYnTzjVCKGDbpuW4RVdvZon228uWnkjoJN8S6w5S4LdgeK8UBMMEhJ")
+    #47vcMwEwosJRc4bCAcRRw7WwezTRn8dCHBjTnYXsZG3UR3Eya88PN3rZKexzwJojRMGVexryHmy47NXmNuDyZirWSexaEYv
