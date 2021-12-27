@@ -8,6 +8,9 @@ OptionParser.new do |parser|
   parser.on("--pt [PT]", "change PATH") do |b|
     options[:pt] = true
   end
+  parser.on("--gruff [GRUFF]", "create graph.") do |b|
+    options[:gruff] = b
+  end
 end.parse!
 if options[:addr]
     if options[:pt]
@@ -15,4 +18,7 @@ if options[:addr]
     else    
         get_pools(options[:addr])
     end
+end
+if options[:gruff]
+    gruff(options[:gruff])
 end

@@ -1,6 +1,7 @@
 require 'httparty'
 require 'json'
 require 'bigdecimal'
+require 'gruff'
 require 'terminal-table'
 module Pools
     class NanoPool
@@ -163,30 +164,30 @@ module Pools
         return results
         end
     end
-end
-class HeroMiners
-    def initialize(address)
-        @address = address
+    class MoneroHash
+        def initialize(address)
+            @address = address
+        end
+        def address
+            @address
+        end
+        def url
+            "https://monerohash.com/api/stats_address?address=#{address}"
+        end
+        def get
+            rsp     = HTTParty.get(url).response.body
+            main    = JSON.parse(rsp)
+            results = {}
+            if main["error"].to_s != "not found"
+                results["name"] = "MoneroHash"
+                if main["payments"].empty?
+                    results["total"] = 0
+                end
+            end
+        return results
+        end
     end
-    def address
-        @address
-    end
-    def url
-        "https://monero.herominers.com/api/stats_address?address=#{address}&longpoll=true"
-    end
-    def get
-        rsp     = HTTParty.get(url).response.body
-        main    = JSON.parse(rsp)["stats"]
-        results = {}
-        bal     = main["balance"].to_f / 1000000000000
-        paid    = main["amtPaid"].to_f / 1000000000000
-        results["balance"]  = bal
-        results["paid"]     = paid
-        results["hashrate"] = main["hash"]
-        results["total"]    = bal + paid
-        results["name"]     = "monero.herominers.com"
-    return results
-    end
+
 end
 def get_all(addr)
     t = 0
@@ -219,8 +220,27 @@ def array(addr)
     end
 return out
 end
-def print_table(addr)
+def color(num)
+    ii = []
+    t  = num.times.map { "%06x" % (rand * 0xffffff) }.to_a
+    t.each {|i| ii << "##{i}" }
+    return ii
+  end
+def gruff(addr)
     out = array(addr)
+    g = Gruff::Bar.new(1000)
+    g.title  = @title
+    g.colors = color(out.count)
+    g.hide_line_numbers = true
+    g.show_labels_for_bar_values = true
+    #@g.group_spacing = 15
+    out.each do |data|
+      g.data(data[0], data[1])
+    end
+    g.write("pools.png")
+end
+def print_table(addr)
+    out   = array(addr)
     table = Terminal::Table.new
     table.title = addr
     table.headings = ["POOL", "Amount"]
@@ -230,6 +250,5 @@ def print_table(addr)
 end
 
 
-#get_pools("49ubSTdDp9hPmYE7paRM6PZFLmqvsedZ56MXLUT8mvYnTzjVCKGDbpuW4RVdvZon228uWnkjoJN8S6w5S4LdgeK8UBMMEhJ")
     #"49ubSTdDp9hPmYE7paRM6PZFLmqvsedZ56MXLUT8mvYnTzjVCKGDbpuW4RVdvZon228uWnkjoJN8S6w5S4LdgeK8UBMMEhJ")
     #47vcMwEwosJRc4bCAcRRw7WwezTRn8dCHBjTnYXsZG3UR3Eya88PN3rZKexzwJojRMGVexryHmy47NXmNuDyZirWSexaEYv
