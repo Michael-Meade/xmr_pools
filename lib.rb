@@ -134,7 +134,6 @@ module Pools
                 main    = JSON.parse(rsp)["stats"]
                 results = {}
                 bal     = main["balance"].to_f / 1000000000000
-                
                 results["balance"]  = bal
                 if !main.has_key?("paid")
                     results["paid"] = 0
