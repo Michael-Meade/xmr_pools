@@ -1,8 +1,10 @@
 <div align="center">
+  
 **[Pools that it supports](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#pools-that-it-currently-supports) • 
 [About](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#About) • 
 [Installing gems](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Installing-gems) • 
 [Help](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Help-Menu)**
+
 </div>
 
 # Pools that it currently supports
