@@ -1,3 +1,14 @@
+<div align="center">
+
+**[Pools that it supports](https://github.com/chroline/Pools-that-it-currently-supports) • 
+[WIKI](https://github.com/chroline/well_app#-wiki) • 
+[TECH STACK](https://github.com/chroline/well_app#-tech-stack) • 
+[CONTRIBUTING](https://github.com/chroline/well_app#%EF%B8%8F-contributing) • 
+[SPREAD THE WORD](https://github.com/chroline/well_app#-spread-the-word) • 
+[LICENSE](https://github.com/chroline/well_app#%EF%B8%8F-license)**
+
+</div>
+
 # Pools that it currently supports
 * supportxmr.com
 * minexmr.com
