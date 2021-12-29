@@ -92,7 +92,7 @@ ruby search.rb --addr 4A3UaV5a2kZLd8dNBPDMA7BBhJGyCxcFVip3rJCgnhcciSzempVCwB4AZG
 
 [https://medium.com/@michaelmeade3/xmr-pool-address-search-367c0168fdb9](https://medium.com/@michaelmeade3/xmr-pool-address-search-367c0168fdb9)
 
-Theres also a more detailed explanation on how to add more pools. 
+Theres also a more detailed explanation on how to add more pools. Also it shows examples of the graphs that are generated.
 
 # License
 
