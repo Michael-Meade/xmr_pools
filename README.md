@@ -92,6 +92,8 @@ ruby search.rb --addr 4A3UaV5a2kZLd8dNBPDMA7BBhJGyCxcFVip3rJCgnhcciSzempVCwB4AZG
 
 [https://medium.com/@michaelmeade3/xmr-pool-address-search-367c0168fdb9](https://medium.com/@michaelmeade3/xmr-pool-address-search-367c0168fdb9)
 
+Theres also a more detailed explanation on how to add more pools. 
+
 # License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
