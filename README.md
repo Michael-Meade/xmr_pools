@@ -7,7 +7,7 @@
 [Installation](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Installation) • 
 [Build gem](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Build-gem) •
 [Help](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Help-Menu) •
-[More Detailed Help](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#More-Detailed) •
+[More Detailed Help](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#More-Detailed-Help) •
 [License](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#License)**
 </div>
 
