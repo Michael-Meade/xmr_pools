@@ -1,1 +1,0 @@
-require_relative 'lib/xmr_pool'
