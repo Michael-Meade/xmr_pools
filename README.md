@@ -7,8 +7,11 @@
 [Installation](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Installation) • 
 [Build gem](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Build-gem) •
 [Help](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Help-Menu) •
+[More Detailed Help](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#More-Detailed) •
 [License](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#License)**
 </div>
+
+
 
 # Pools that it currently supports
 * supportxmr.com
@@ -85,6 +88,9 @@ ruby search.rb --addr 4A3UaV5a2kZLd8dNBPDMA7BBhJGyCxcFVip3rJCgnhcciSzempVCwB4AZG
 ```ruby
 ruby search.rb --addr 4A3UaV5a2kZLd8dNBPDMA7BBhJGyCxcFVip3rJCgnhcciSzempVCwB4AZGf3KNWVeEihAGoF4ZYhhU6bePeEP3eh9ke26P7 --pt --total
 ```
+# More Detailed Help
+
+[https://medium.com/@michaelmeade3/xmr-pool-address-search-367c0168fdb9](https://medium.com/@michaelmeade3/xmr-pool-address-search-367c0168fdb9)
 
 # License
 
