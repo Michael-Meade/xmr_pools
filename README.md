@@ -29,6 +29,8 @@ gem install gruff
 gem install terminal-table
 gem install httparty
 ```
+Note that if you install the gem all these gems will be automatically installed. 
+
 # Installation
 
 Add this line to your application's Gemfile:
@@ -46,6 +48,14 @@ Or install it yourself as:
     $ gem install xmrpoolsearch
 
 # Build Gem
+```ruby
+    sudo gem build xmrpoolsearch.gemspec
+```
+This will build the gem form scratch. You might need to delete the current versioned .gem file for the gem to be built. If you do not want to build the gem from scratch you can skip the build command and just use the install command below.  
+```ruby
+    sudo gem install xmrpoolsearch-0.1.0.gem
+```
+This will install the gem on your system. This is needed to use the code. If you do not want to install the gem you can use the `lib.rb` file. To use, put `require_relative 'lib'` on the first line of file and you can do the same stuff. 
 
 # Help Menu
 ```ruby
