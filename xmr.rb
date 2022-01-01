@@ -1,2 +1,2 @@
 require  'xmrpoolsearch'
-Pools::get_pools("49ubSTdDp9hPmYE7paRM6PZFLmqvsedZ56MXLUT8mvYnTzjVCKGDbpuW4RVdvZon228uWnkjoJN8S6w5S4LdgeK8UBMMEhJ")
+Pools::get_pools("8ALdP9yTXenfNjgpm5TrRf7TGoBr8aUKU3kQcu7CLzfVJZYMXTohVb85GrRu7dy8PsTYrcisdG9LdMTmkuPRdZN7CnFsVWB")

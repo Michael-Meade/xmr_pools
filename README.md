@@ -7,7 +7,7 @@
 [Installation](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Installation) • 
 [Build gem](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Build-gem) •
 [Help](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Help-Menu) •
-[More Detailed Help](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#More-Detailed-Help) •
+[Adding Pool](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Adding-Pool) •
 [License](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#License)**
 </div>
 
@@ -88,11 +88,39 @@ ruby search.rb --addr 4A3UaV5a2kZLd8dNBPDMA7BBhJGyCxcFVip3rJCgnhcciSzempVCwB4AZG
 ```ruby
 ruby search.rb --addr 4A3UaV5a2kZLd8dNBPDMA7BBhJGyCxcFVip3rJCgnhcciSzempVCwB4AZGf3KNWVeEihAGoF4ZYhhU6bePeEP3eh9ke26P7 --pt --total
 ```
-# More Detailed Help
+# Adding Pool
 
-[https://medium.com/@michaelmeade3/xmr-pool-address-search-367c0168fdb9](https://medium.com/@michaelmeade3/xmr-pool-address-search-367c0168fdb9)
+```ruby
+class SupportXmr
+    def initialize(address)
+        @address = address
+    end
+    def address
+        @address
+    end
+    def url
+        "https://supportxmr.com/api/miner/#{address}/stats"
+    end
+    def get
+        rsp     = HTTParty.get(url).response.body
+        main    = JSON.parse(rsp)
+        results = {}
+        bal     = main["amtDue"].to_f / 1000000000000
+        paid    = main["amtPaid"].to_f / 1000000000000
+        results["balance"]  = bal
+        results["paid"]     = paid
+        results["hashrate"] = main["hash"]
+        results["total"]    = bal + paid
+        results["name"]     = "supportxmr.com"
+    return results
+    end
+end
+```
+The code above is a example of a Pool class. When the script is ran, then the code will run the get method of each class. If the inputed Monero address has mined on the pool the code will return the amount and other information.
 
-Theres also a more detailed explanation on how to add more pools. Also it shows examples of the graphs that are generated.
+To add a new pool to the program, create a new class that contains the name of the pool. For the program to work the new pool class must have a couple of different things such as a URL method, an instance variable named address and a get method. The get method is what is ran to get get the mined information. 
+
+The get method should have a hash named, results. The result JSON must have a couple of different keys such as balance, total, name, paid. If the pool has a record of that Monero address, the JSON the pool returns will be parsed and the data will be stored in the result JSON. The last thing the get method does is return the results hash. 
 
 # License
 
