@@ -8,6 +8,7 @@
 [Build gem](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Build-gem) •
 [Help](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Help-Menu) •
 [Adding Pool](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#Adding-Pool) •
+[Screenshots](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#screenshots) •
 [License](https://github.com/Michael-Meade/xmr_pools/blob/main/README.md#License)**
 </div>
 
@@ -121,6 +122,22 @@ The code above is a example of a Pool class. When the script is ran, then the co
 To add a new pool to the program, create a new class that contains the name of the pool. For the program to work the new pool class must have a couple of different things such as a URL method, an instance variable named address and a get method. The get method is what is ran to get get the mined information. 
 
 The get method should have a hash named, results. The result JSON must have a couple of different keys such as balance, total, name, paid. If the pool has a record of that Monero address, the JSON the pool returns will be parsed and the data will be stored in the result JSON. The last thing the get method does is return the results hash. 
+
+# Screenshots
+<img src="https://user-images.githubusercontent.com/47438130/148231462-4f57d0bd-16f4-41bc-9be8-0eeb46622591.png" alt="Bar graph of pools"  width="300" height="300"/>
+The image above is an example of what the bar graph looks like.
+
+<img src="https://user-images.githubusercontent.com/47438130/148247555-fa95c268-c334-495d-9d38-2c7c367d4492.png" alt="Get total mined"/>
+Example of the results when --total is used.
+
+<br>
+<img src="https://user-images.githubusercontent.com/47438130/148247851-f5886897-93cc-4934-8889-b2df732ee6e0.png" alt="printing table"/>
+Example of the --pt command, which will print the results in a table.
+<br>
+<img src="https://user-images.githubusercontent.com/47438130/148248098-190bf6c9-eccc-42ab-9cf0-05ef273631b0.png" alt="Using pt and total"/>
+The image above shows that the --pt and the --total command can be used together. The total will be printed under the table. 
+<br>
+
 
 # License
 
