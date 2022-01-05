@@ -121,7 +121,7 @@ The code above is a example of a Pool class. When the script is ran, then the co
 
 To add a new pool to the program, create a new class that contains the name of the pool. For the program to work the new pool class must have a couple of different things such as a URL method, an instance variable named address and a get method. The get method is what is ran to get get the mined information. 
 
-The get method should have a hash named, results. The result JSON must have a couple of different keys such as balance, total, name, paid. If the pool has a record of that Monero address, the JSON the pool returns will be parsed and the data will be stored in the result JSON. The last thing the get method does is return the results hash. 
+The get method should have a hash named, results. The result JSON must have a couple of different keys such as balance, total, name, paid. If the pool has a record of that Monero address, the JSON the pool returns will be parsed and the data will be stored in the JSON hash named results. The last thing the get method does is return the results hash. 
 
 # Screenshots
 <img src="https://user-images.githubusercontent.com/47438130/148231462-4f57d0bd-16f4-41bc-9be8-0eeb46622591.png" alt="Bar graph of pools"  width="300" height="300"/>
