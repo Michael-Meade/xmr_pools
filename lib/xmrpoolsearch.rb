@@ -34,7 +34,7 @@ require 'colorize'
         out = []
         Pools.constants.select do |c|
             k = Pools.const_get(c).new(addr).get
-            out += [k["name"], k["total"], k["balance"], k["paid"], k["hashrate"]] if not k.nil?
+            out << [k["name"], k["total"], k["balance"], k["paid"], k["hashrate"]] if not k.nil?
         end
     return out
     end
@@ -59,6 +59,7 @@ require 'colorize'
     end
     def self.print_table(addr)
         out   = array(addr)
+        p out
         table = Terminal::Table.new
         table.title    = addr
         table.headings = ["POOL", "Amount", "Balance", "Paid", "HashRate"]
