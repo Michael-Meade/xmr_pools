@@ -238,6 +238,14 @@ def array(addr)
     end
 return out
 end
+def self.basic(addr)
+    o = []
+    Pools.constants.select do |c|
+        k = Pools.const_get(c).new(addr).get
+        o << [k["name"], k["total"]] if not k.nil?
+    end
+return o
+end
 def color(num)
     ii = []
     t  = num.times.map { "%06x" % (rand * 0xffffff) }.to_a

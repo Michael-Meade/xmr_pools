@@ -1,4 +1,6 @@
+
 require  'xmrpoolsearch'
+#require_relative 'test'
 require 'optparse'
 
 options = {}
@@ -6,11 +8,11 @@ OptionParser.new do |parser|
   parser.on("--addr [addr]", "input Monero address.") do |a|
     options[:addr] = a
   end
-  parser.on("--pt [PT]", "change PATH") do |b|
+  parser.on("--pt [PT]", "Print table") do |b|
     options[:pt] = true
   end
-  parser.on("--gruff [GRUFF]", "create graph.") do |b|
-    options[:gruff] = b
+  parser.on("--gruff [GRUFF]", "create bar graph.") do |b|
+    options[:gruff] = true
   end
 end.parse!
 if options[:addr]
@@ -21,5 +23,5 @@ if options[:addr]
     end
 end
 if options[:gruff]
-    Pools::gruff(options[:gruff])
+    Pools::gruff(options[:addr])
 end

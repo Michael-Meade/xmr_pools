@@ -4,14 +4,13 @@ require 'json'
 require 'bigdecimal'
 require 'gruff'
 require 'terminal-table'
+require 'colorize'
   module Pools
     def self.get_all(addr)
       t = 0
       Pools.constants.select do |c|
           k = Pools.const_get(c).new(addr).get
-          if !k.nil?
-             t += k["total"]
-          end
+          t += k["total"] if not k.nil?
       end
       puts "Address: #{addr}"
 
@@ -21,27 +20,21 @@ require 'terminal-table'
         t = 0
         Pools.constants.select do |c|
             k = Pools.const_get(c).new(addr).get
-            if !k.nil?
-               t += k["total"]
-            end
+            t += k["total"] if not k.nil?
         end
     return t
     end
     def self.get_pools(addr)
         Pools.constants.select do |c|
             k = Pools.const_get(c).new(addr).get
-            if !k.nil?
-               puts k["name"].to_s + " - " + k["total"].to_s
-            end
+            puts k["name"].to_s + " - " + k["total"].to_s if not k.nil?
         end
     end
     def self.array(addr)
         out = []
         Pools.constants.select do |c|
             k = Pools.const_get(c).new(addr).get
-            if !k.nil?
-                out << [k["name"], k["total"]]
-            end
+            out += [k["name"], k["total"], k["balance"], k["paid"], k["hashrate"]] if not k.nil?
         end
     return out
     end
@@ -52,7 +45,7 @@ require 'terminal-table'
         return ii
       end
     def self.gruff(addr)
-        out = array(addr)
+        out = basic(addr)
         g = Gruff::Bar.new(1000)
         g.title  = @title
         g.colors = color(out.count)
@@ -67,11 +60,19 @@ require 'terminal-table'
     def self.print_table(addr)
         out   = array(addr)
         table = Terminal::Table.new
-        table.title = addr
-        table.headings = ["POOL", "Amount"]
-        table.rows  = out
-        table.style = {:width => @width, :border => :unicode_round, :alignment => :center }
+        table.title    = addr
+        table.headings = ["POOL", "Amount", "Balance", "Paid", "HashRate"]
+        table.rows     = out
+        table.style    = {:width => @width, :border => :unicode_round, :alignment => :center }
         puts table
+    end
+    def self.basic(addr)
+        o = []
+        Pools.constants.select do |c|
+            k = Pools.const_get(c).new(addr).get
+            o << [k["name"], k["total"]] if not k.nil?
+        end
+    return o
     end
     class NanoPool
         def initialize(address)
@@ -127,7 +128,6 @@ require 'terminal-table'
             end
         end
     end
-    
     class HashVaultPro
         def initialize(address)
             @address = address
@@ -170,9 +170,7 @@ require 'terminal-table'
         def get
             rsp     = HTTParty.get(url).response.body
             main    = JSON.parse(rsp)
-            if main.kind_of?(Array)
-                main = main.shift
-            end
+            main = main.shift if main.kind_of?(Array)
             if main["error"].to_s != "no workers found"
                 results = {}
                 balance = main["balance"].to_f / 1000000000000
@@ -265,11 +263,7 @@ require 'terminal-table'
             end
         end
     end
-
 end
-
-
-
-      #"49ubSTdDp9hPmYE7paRM6PZFLmqvsedZ56MXLUT8mvYnTzjVCKGDbpuW4RVdvZon228uWnkjoJN8S6w5S4LdgeK8UBMMEhJ")
-      #47vcMwEwosJRc4bCAcRRw7WwezTRn8dCHBjTnYXsZG3UR3Eya88PN3rZKexzwJojRMGVexryHmy47NXmNuDyZirWSexaEYv
-  #4A3UaV5a2kZLd8dNBPDMA7BBhJGyCxcFVip3rJCgnhcciSzempVCwB4AZGf3KNWVeEihAGoF4ZYhhU6bePeEP3eh9ke26P7
+#"49ubSTdDp9hPmYE7paRM6PZFLmqvsedZ56MXLUT8mvYnTzjVCKGDbpuW4RVdvZon228uWnkjoJN8S6w5S4LdgeK8UBMMEhJ")
+#47vcMwEwosJRc4bCAcRRw7WwezTRn8dCHBjTnYXsZG3UR3Eya88PN3rZKexzwJojRMGVexryHmy47NXmNuDyZirWSexaEYv
+#4A3UaV5a2kZLd8dNBPDMA7BBhJGyCxcFVip3rJCgnhcciSzempVCwB4AZGf3KNWVeEihAGoF4ZYhhU6bePeEP3eh9ke26P7
