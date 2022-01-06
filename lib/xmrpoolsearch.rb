@@ -62,7 +62,7 @@ require 'terminal-table'
         out.each {|i| t += i[1]}
         table = Terminal::Table.new
         table.title    = addr
-        table.headings = ["POOL", "Amount", "Balance", "Paid", "HashRate"]
+        table.headings = ["Pool", "Total", "Balance", "Paid", "HashRate"]
         table.rows     = out
         table.style    = {:width => @width, :border => :unicode_round, :alignment => :center }
         puts table

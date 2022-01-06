@@ -1,8 +1,8 @@
-
+require 'colorize'
 require  'xmrpoolsearch'
 #require_relative 'test'
 require 'optparse'
-b1=%q{
+b1 = %q{
  __       __                                                          __                             __                         
 |  \     /  \                                                        |  \                           |  \                        
 | $$\   /  $$  ______   _______    ______    ______    ______        | $$____   __    __  _______  _| $$_     ______    ______  
@@ -16,7 +16,7 @@ b1=%q{
                                                                                                                                                                                                                                                            
 }
 
-b2=%q{
+b2 = %q{
 ███    ███  ██████  ███    ██ ███████ ██████   ██████      ██   ██ ██    ██ ███    ██ ████████ ███████ ██████  
 ████  ████ ██    ██ ████   ██ ██      ██   ██ ██    ██     ██   ██ ██    ██ ████   ██    ██    ██      ██   ██ 
 ██ ████ ██ ██    ██ ██ ██  ██ █████   ██████  ██    ██     ███████ ██    ██ ██ ██  ██    ██    █████   ██████  
@@ -33,9 +33,9 @@ def menu(b1, b2)
     ban = banners.sample
     r   = rand(0..5)
     if r.even?
-        puts ban.to_s.red
-    else
         puts ban.to_s.green
+    else
+        puts ban.to_s.red
     end
 end
 menu(b1, b2)
