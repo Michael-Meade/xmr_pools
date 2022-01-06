@@ -4,7 +4,6 @@ require 'json'
 require 'bigdecimal'
 require 'gruff'
 require 'terminal-table'
-require 'colorize'
   module Pools
     def self.get_all(addr)
       t = 0
