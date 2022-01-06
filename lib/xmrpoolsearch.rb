@@ -58,14 +58,16 @@ require 'colorize'
         g.write("pools.png")
     end
     def self.print_table(addr)
+        t = 0
         out   = array(addr)
-        p out
+        out.each {|i| t += i[1]}
         table = Terminal::Table.new
         table.title    = addr
         table.headings = ["POOL", "Amount", "Balance", "Paid", "HashRate"]
         table.rows     = out
         table.style    = {:width => @width, :border => :unicode_round, :alignment => :center }
         puts table
+        puts "Total: #{t}"
     end
     def self.basic(addr)
         o = []

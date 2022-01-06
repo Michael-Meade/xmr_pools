@@ -14,7 +14,11 @@ OptionParser.new do |parser|
   parser.on("--gruff [GRUFF]", "create bar graph.") do |b|
     options[:gruff] = true
   end
+  parser.on("--total", "Get total") do |b|
+    options[:total] = true
+  end
 end.parse!
+
 if options[:addr]
     if options[:pt]
         Pools::print_table(options[:addr])
@@ -24,4 +28,8 @@ if options[:addr]
 end
 if options[:gruff]
     Pools::gruff(options[:addr])
+end
+if options[:total]
+    t = Pools::get_total(options[:addr])
+    puts "Total: #{t}"
 end
