@@ -53,6 +53,13 @@ Or install it yourself as:
 
 # Build Gem
 ```ruby
+sudo apt-get install libmagickcore-dev
+sudo apt install imagemagick
+
+```
+Installing imagemagick. This is needed to create the graphs. 
+
+```ruby
     sudo gem build xmrpoolsearch.gemspec
 ```
 This will build the gem form scratch. You might need to delete the current versioned .gem file for the gem to be built. If you do not want to build the gem from scratch you can skip the build command and just use the install command below.  
